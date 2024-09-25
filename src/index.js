@@ -1,8 +1,8 @@
-console.log(data);
+// console.log(data);
 
 //You can start simple and just render a single
 //pokemon card from the first element
-console.log(data[0]);
+// console.log(data[0]);
 
 function loadData() {
   const cardList = document.getElementById("cards");
@@ -10,8 +10,50 @@ function loadData() {
 
   data.forEach((pokemon) => {
     const card = makeCard(pokemon);
+    const button = document.createElement("button");
+    button.textContent = "Show Game Appearances";
+    button.className = "card--button";
+    button.onclick = () => showGameAppearances(card, pokemon);
+    card.appendChild(button);
     cardList.appendChild(card);
   });
+}
+
+function showGameAppearances(card, pokemon) {
+  const popup = document.getElementById("popup");
+  const popupCard = document.getElementById("popup-card");
+  popupCard.innerHTML = "";
+
+  const li = document.createElement("li");
+
+  console.log(pokemon.sprites.versions);
+  let games = "";
+
+  for (const generation in pokemon.sprites.versions) {
+    if (pokemon.sprites.versions.hasOwnProperty(generation)) {
+      for (const game in pokemon.sprites.versions[generation]) {
+        if (pokemon.sprites.versions[generation].hasOwnProperty(game)) {
+          games +=  game + ',  ';
+        }
+      }
+    }
+  }
+  li.textContent = games;
+
+  //   pokemon.sprites.versions.forEach(version => {
+  //     console.log(version)
+  //   });
+
+  popupCard.appendChild(card);
+  popupCard.appendChild(li);
+
+  popup.style.display = "flex";
+
+  const closeButton = document.querySelector(".close-button");
+  closeButton.onclick = () => {
+    popup.style.display = "none";
+    loadData(); //not a good solution but I am lazy :P
+  };
 }
 
 function makeCard(pokemon) {
@@ -26,11 +68,11 @@ function makeCard(pokemon) {
   li.className = "card";
 
   const name = document.createElement("p");
-//   name.textContent = pokemon.name;
+  //   name.textContent = pokemon.name;
   name.className = "card--text";
 
   const stats = document.createElement("div");
-  stats.className = 'card--text stats';
+  stats.className = "card--text stats";
 
   pokemon.stats.forEach((stat) => {
     const statElement = document.createElement("p");
