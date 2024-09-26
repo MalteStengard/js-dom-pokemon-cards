@@ -144,3 +144,31 @@ h2 {
   border-radius: 50%; 
 }
 
+.img-button {
+
+  
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #250707;
+  background-color: #b8a690;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.img-button:hover {
+  background-color: #1665c0;
+  color: white;
+  transform: scale(1.05);
+}
+
+.img-button:active {
+  background-color: #01af3b;
+}
+
